@@ -1,24 +1,28 @@
-# rupert
+# Tableau browser
 
-## Project setup
+## Install dependencies
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+## Serve
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+## Providing credentials
+### Create `.env.local` file with the following variables:
 ```
-yarn build
+VUE_APP_TABLEAU_SERVER=
+VUE_APP_TABLEAU_SITE=
+VUE_APP_TABLEAU_USER=
+VUE_APP_TABLEAU_PASSWORD=
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Overcoming CORS
+A simple proxy server forwards request to Tableau.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Run proxy server
+```
+yarn proxy
+```
