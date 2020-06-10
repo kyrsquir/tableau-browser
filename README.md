@@ -23,7 +23,7 @@ VUE_APP_TABLEAU_PASSWORD=
 ```
 
 ## Overcoming CORS
-A simple proxy server forwards request to Tableau.
+A simple proxy server forwards requests to Tableau and handles authentication.
 
 ### Run proxy server
 ```
