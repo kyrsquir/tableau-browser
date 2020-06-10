@@ -1,5 +1,5 @@
 <template lang="pug">
-b-row.entry(:class="{ 'selected': isSelected }" @mouseover="onMouseover" @click="onClick")
+b-row.entry(:class="{ 'hovered': isSelected }" @mouseover="onMouseover" @click="onClick")
   b-col(v-for="(field, index) in fields" :key="index")
     span(v-if="field.type === 'date'") {{ entry[field.name] | moment("from", "now", true) }} ago
     span(v-if="field.type === 'array'") {{ entry[field.name] | displayArray }}
@@ -52,7 +52,7 @@ export default {
   height 3rem
   transition left 1s
   cursor pointer
-  &.selected
+  &.hovered
     position relative
     left 1.5rem
     margin-bottom 1rem

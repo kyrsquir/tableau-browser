@@ -52,6 +52,9 @@ export default new Vuex.Store({
     async fetch({ commit }) {
       let { data } = await axios.get(`${PREFIX}/sites/_siteId_/views`);
       commit("setList", data.views.view);
+    },
+    async fetchUsers({ commit }) {
+      let { data } = await axios.get(`${PREFIX}/sites/_siteId_/users`);
     }
   }
 });
