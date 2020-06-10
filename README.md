@@ -11,10 +11,13 @@ yarn serve
 ```
 
 ## Providing credentials
-### Create `.env.local` file with the following variables:
+Create `.env.local` file with the following variables:
 ```
 VUE_APP_TABLEAU_SERVER=
 VUE_APP_TABLEAU_SITE=
+```
+Optional:
+```
 VUE_APP_TABLEAU_USER=
 VUE_APP_TABLEAU_PASSWORD=
 ```
