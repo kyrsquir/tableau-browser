@@ -3,8 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-
-const PREFIX = "http://localhost:1337";
+const API_PREFIX = "/api/3.4";
 const {
   VUE_APP_TABLEAU_SERVER: server,
   VUE_APP_TABLEAU_SITE: site
@@ -13,15 +12,14 @@ export default new Vuex.Store({
   state: {
     server: server,
     site: site,
-    // authenticated: true,
-    authenticated: false,
+    credentials: null,
     list: [],
     selected: null,
     isEditing: false
   },
   mutations: {
-    setAuthenticated(state, authenticated) {
-      state.authenticated = authenticated;
+    setAuthCredentials(state, credentials) {
+      state.credentials = credentials;
     },
     setList(state, list) {
       state.list = list;
@@ -42,19 +40,41 @@ export default new Vuex.Store({
   },
   actions: {
     async login({ state, commit }, params) {
-      params.server = state.server;
-      params.site = state.site;
-      let { data } = await axios.post(`${PREFIX}/auth/signin`, params);
+      const site = state.site;
+      const { user, password } = params;
+      let { data } = await axios.post(
+        `${API_PREFIX}/auth/signin`,
+        `<tsRequest>
+              <credentials name="${user}" password="${password}">
+                  <site contentUrl="${site}" />
+              </credentials>
+         </tsRequest>`,
+        {
+          headers: {
+            "Content-Type": "text/xml"
+          }
+        }
+      );
       if (data) {
-        commit("setAuthenticated", true);
+        commit("setAuthCredentials", data.credentials);
       }
     },
-    async fetch({ commit }) {
-      let { data } = await axios.get(`${PREFIX}/sites/_siteId_/views`);
+    async fetch({ state, commit }) {
+      const { token, site } = state.credentials;
+      let { data } = await axios.get(`${API_PREFIX}/sites/${site.id}/views`, {
+        headers: {
+          "X-Tableau-Auth": token
+        }
+      });
       commit("setList", data.views.view);
     },
-    async fetchUsers({ commit }) {
-      let { data } = await axios.get(`${PREFIX}/sites/_siteId_/users`);
+    async fetchUsers({ state, commit }) {
+      const { token, site } = state.credentials;
+      let { data } = await axios.get(`${API_PREFIX}/sites/${site.id}/users`, {
+        headers: {
+          "X-Tableau-Auth": token
+        }
+      });
     }
   }
 });

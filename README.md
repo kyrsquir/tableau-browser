@@ -10,7 +10,7 @@ yarn install
 yarn serve
 ```
 
-## Providing credentials
+## Providing Tableau credentials
 Create `.env.local` file with the following variables:
 ```
 VUE_APP_TABLEAU_SERVER=
@@ -20,12 +20,4 @@ Optional:
 ```
 VUE_APP_TABLEAU_USER=
 VUE_APP_TABLEAU_PASSWORD=
-```
-
-## Overcoming CORS
-A simple proxy server forwards requests to Tableau and handles authentication.
-
-### Run proxy server
-```
-yarn proxy
 ```

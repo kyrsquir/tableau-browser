@@ -1,7 +1,7 @@
 <template lang="pug">
 b-container.px-0(fluid)
   Popup
-  List(:fields="fields" v-if="$store.state.authenticated")
+  List(:fields="fields" v-if="$store.state.credentials")
 </template>
 
 <script>

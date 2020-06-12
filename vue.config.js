@@ -1,5 +1,5 @@
 module.exports = {
   devServer: {
-    host: "localhost"
+    proxy: process.env.VUE_APP_TABLEAU_SERVER
   }
 };

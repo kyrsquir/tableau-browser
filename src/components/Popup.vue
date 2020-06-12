@@ -1,6 +1,6 @@
 <template lang="pug">
 b-modal(
-  v-model="!$store.state.authenticated"
+  v-model="!$store.state.credentials"
   title="Sign in"
   :ok-only="true"
   ok-title="Login"
